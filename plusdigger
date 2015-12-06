@@ -1,6 +1,4 @@
 function dig()
-  turtle.dig()
-
   turtle.turnLeft()
   turtle.dig()
   turtle.turnRight()
@@ -13,6 +11,7 @@ function dig()
   turtle.digUp()
 
   if turtle.inspect() then
+    turtle.dig()
     return turtle.forward()
   end
   return false
