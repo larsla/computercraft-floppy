@@ -1,7 +1,14 @@
 function dig()
   turtle.dig()
-  turtle.digLeft()
-  turtle.digRight()
+
+  turtle.turnLeft()
+  turtle.dig()
+  turtle.turnRight()
+
+  turtle.turnRight()
+  turtle.dig()
+  turtle.turnLeft()
+
   turtle.digDown()
   turtle.digUp()
 
@@ -63,7 +70,6 @@ function dig_forward_until_stop()
 end
 
 turtle.refuel()
-rednet.open("left")
 rednet.open("right")
 
 turtle.up()
