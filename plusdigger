@@ -90,9 +90,12 @@ while more do
   empty()
   rednet.broadcast("delivery_notice", "reporting")
 
+  turtle.turnRight()
+  turtle.forward()
   for i=1,5 do
     if not dig() then
       more = false
     end
   end
+  turtle.turnRight()
 end
