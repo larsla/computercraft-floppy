@@ -22,7 +22,7 @@ end
 
 function fill()
   s = {}
-  for i=1, 10 do  
+  for i=1, 10 do
     s[i] = forward
   end
   return s
@@ -38,7 +38,7 @@ function also(s, f, r)
       i = 0
     end
   end
-  return s      
+  return s
 end
 
 function main ()
@@ -47,7 +47,7 @@ function main ()
   s = also(s, refuel, 9)
   print(s)
   s = also(s, cleanup,8)
-  print(s)  
+  print(s)
   for i=1,10 do
     print(s[i])
     s[i]()
@@ -73,7 +73,7 @@ function cleanup()
 end
 
 
-function go() 
+function go()
   for i=1,100 do
     main()
   end
@@ -83,3 +83,5 @@ go()
 turn()
 go()
 go()
+
+#test
