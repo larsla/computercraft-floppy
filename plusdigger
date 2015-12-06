@@ -1,0 +1,69 @@
+function dig()
+  turtle.dig()
+  turtle.digLeft()
+  turtle.digRight()
+  turtle.digDown()
+  turtle.digUp()
+
+  if turtle.inspect() then
+    return turtle.forward()
+  end
+  return false
+end
+
+function refuel()
+  for i=1,16 do
+    turtle.select(i)
+    turtle.refuel()
+  end
+end
+
+function cleanup()
+  for i=1,16 do
+    item = turtle.getItemDetail(i)
+    if item then
+      print(item.name)
+      if item.name == "minecraft:cobblestone" or item.name == "minecraft:dirt" or item.name == "minecraft:gravel" then
+        turtle.select(i)
+        turtle.drop()
+      end
+    end
+  end
+end
+
+function report()
+  for i=1,16 do
+    item = turtle.getItemDetail(i)
+    if item then
+      print(item.name)
+      rednet.broadcast(item, "reporting")
+    end
+  end
+end
+
+function turn()
+  turtle.turnLeft()
+  turtle.turnLeft()
+end
+
+function dig_forward_until_stop()
+  steps = 0
+  i = 0
+  while dig() do
+    i = i + 1
+    steps = steps + 1
+    if i > 30 then
+      refuel()
+      cleanup()
+      report()
+      i = 0
+    end
+  end
+  return steps
+end
+
+steps = dig_forward_until_stop()
+turn()
+for i=1, steps do
+  turtle.forward()
+end
