@@ -62,6 +62,11 @@ function dig_forward_until_stop()
   return steps
 end
 
+turtle.refuel()
+rednet.open("left")
+rednet.open("right")
+
+turtle.up()
 steps = dig_forward_until_stop()
 turn()
 for i=1, steps do
