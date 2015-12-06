@@ -35,7 +35,6 @@ function report()
   for i=1,16 do
     item = turtle.getItemDetail(i)
     if item then
-      print(item.name)
       rednet.broadcast(item, "reporting")
     end
   end
@@ -53,6 +52,7 @@ function dig_forward_until_stop()
     i = i + 1
     steps = steps + 1
     if i > 30 then
+      print("maintenance")
       refuel()
       cleanup()
       report()
@@ -67,3 +67,5 @@ turn()
 for i=1, steps do
   turtle.forward()
 end
+
+rednet.broadcast("back_home", "location")
