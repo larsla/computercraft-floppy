@@ -1,0 +1,37 @@
+function forward()
+  turtle.dig()
+  if turtle.forward() then
+    turtle.digUp()
+    return true
+  end
+  return false
+end
+
+function refuel()
+  for i=1,16 do
+    turtle.select(i)
+    turtle.refuel()
+  end
+end
+
+function loop()
+  for i=1, 100 do
+  
+    for i=1, 30 do
+    
+      forward()
+    end
+    refuel()
+  end
+end
+
+function turn()
+  turtle.turnLeft()
+  turtle.turnLeft()
+end
+
+
+turtle.turnRight()
+loop()
+turn()
+loop()

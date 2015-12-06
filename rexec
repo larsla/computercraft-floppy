@@ -1,0 +1,4 @@
+rednet.open("right")
+s, c, d = rednet.receive("rpc")
+
+c()

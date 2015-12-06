@@ -1,0 +1,7 @@
+
+rednet.open("left")
+s, v, d = rednet.receive("dns")
+
+for k in ipairs(v) do
+  print(k)
+end

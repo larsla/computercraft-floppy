@@ -1,0 +1,7 @@
+rednet.open("left")
+
+while true do
+  s, v, d = rednet.receive()
+  print(s + "(" + d + "): " + v)
+  rednet.send(s, "ok")
+end

@@ -1,0 +1,100 @@
+function forward()
+  turtle.dig()
+  if turtle.forward() then
+    turtle.digUp()
+    return true
+  end
+  return false
+end
+
+function refuel()
+  print("refuel")
+  for i=1,16 do
+    turtle.select(i)
+    turtle.refuel()
+  end
+end
+
+function dummy()
+  print("forward")
+end
+
+
+function fill()
+  s = {}
+  for i=1, 10 do  
+    s[i] = forward
+  end
+  return s
+end
+
+function also(s, f, r)
+  i = 0
+  for o=1,10 do
+    i = i + 1
+    if i == r then
+      print(".")
+      s[o] = f
+      i = 0
+    end
+  end
+  return s      
+end
+
+function main ()
+  s = fill()
+  print(s)
+  s = also(s, refuel, 9)
+  print(s)
+  s = also(s, cleanup,8)
+  s = also(s, inventory, 5)
+  print(s)  
+  for i=1,10 do
+    print(s[i])
+    s[i]()
+  end
+end
+
+function turn()
+  turtle.turnLeft()
+  turtle.turnLeft()
+end
+
+function cleanup()
+  for i=1,16 do
+    item = turtle.getItemDetail(i)
+    if item then
+      print(item.name)
+      if item.name == "minecraft:cobblestone" or item.name == "minecraft:dirt" or item.name == "minecraft:gravel" then
+        turtle.select(i)
+        turtle.drop()
+      end
+    end
+  end
+end
+
+
+function go() 
+  for i=1,10 do
+    main()
+  end
+end
+
+function inventory()
+  master = rednet.lookup("master")
+  print(master)
+  for i=1,16 do
+    item = turtle.getItemDetail(i)
+    if item then
+      print(item.name)
+      rednet.send(master, item, "reporting")
+      if not rednet.receive("reporting", 10) then
+        turn()
+      end
+    end
+  end
+end
+
+turtle.refuel()
+rednet.open("right")
+inventory()

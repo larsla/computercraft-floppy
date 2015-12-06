@@ -1,0 +1,5 @@
+while true do
+  print("key: ")
+  k = io.read()
+  rednet.send(9, k)
+end

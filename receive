@@ -1,0 +1,16 @@
+f = {}
+f["a"] = turtle.turnLeft
+f["w"] = turtle.forward
+f["s"] = turtle.back
+f["d"] = turtle.turnRight
+f["e"] = turtle.dig
+f["q"] = turtle.up
+f["z"] = turtle.down
+
+while true do
+  sender, r = rednet.receive()
+  if r then
+    print(r)
+    f[r]()
+  end
+end

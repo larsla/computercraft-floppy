@@ -1,0 +1,10 @@
+rednet.open("left")
+rednet.host("master", "reporting")
+
+while true do
+  s, v, d = rednet.receive("reporting")
+  if s and v and d then
+    print(s .. "(" .. d .. "): " .. v.name)
+    rednet.send(s, "ok", "reporting")
+  end
+end

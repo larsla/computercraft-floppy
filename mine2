@@ -1,0 +1,49 @@
+function forward()
+  turtle.dig()
+  if turtle.forward() then
+    turtle.digUp()
+    return true
+  end
+  return false
+end
+
+function refuel()
+  for i=1,16 do
+    turtle.select(i)
+    turtle.refuel()
+  end
+end
+
+function loop()
+  for i=1, 10 do
+  
+    for i=1, 10 do
+    
+      forward()
+    end
+    refuel()
+    cleanup()
+  end
+end
+
+function turn()
+  turtle.turnLeft()
+  turtle.turnLeft()
+end
+
+function cleanup()
+  for i=1,16 do
+    item = turtle.getItemDetail(i)
+    if item.name == "minecraft:cobble_stone" then
+      turtle.select(i)
+      turtle.drop()
+    end
+  end
+end
+
+
+
+turtle.turnRight()
+loop()
+turn()
+loop()
